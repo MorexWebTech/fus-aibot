@@ -1,6 +1,14 @@
 # Fus AI Model - Multi-AI Platform
 
-A comprehensive AI platform that brings together multiple AI services for content creation, including voiceovers, image generation, video creation, music composition, code generation, and speech processing.
+A comprehensive AI platform that brings together multiple AI services for content creation, including voiceovers, image generation, video creation, music composition, code generation, and speech processing. This platform now includes an advanced AI feature that runs locally without the need for an external API.
+
+## Admin and User Portals
+
+The platform now includes admin and user portals to manage users and services.
+
+## jules.google
+
+The jules.google feature is now available.
 
 ## 🚀 Features
 
