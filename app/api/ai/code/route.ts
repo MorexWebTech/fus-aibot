@@ -8,14 +8,32 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
     }
 
-    // Simulate code generation
-    await new Promise(resolve => setTimeout(resolve, 2500));
+    let code: string;
 
-    const sampleCode = generateSampleCode(language, prompt);
+    if (provider === 'claude') {
+      const response = await fetch('http://localhost:4000/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate code from the local Claude service.');
+      }
+
+      const data = await response.json();
+      code = data.code;
+    } else {
+      // Simulate code generation for other providers
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      code = generateSampleCode(language, prompt);
+    }
 
     const codeData = {
       success: true,
-      code: sampleCode,
+      code,
       language,
       prompt: prompt.substring(0, 100) + '...',
       provider,

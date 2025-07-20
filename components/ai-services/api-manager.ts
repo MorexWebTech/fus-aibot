@@ -19,6 +19,7 @@ export class AIServiceManager {
       deepseek: process.env.NEXT_PUBLIC_DEEPSEEK_API_KEY || '',
       lamia: process.env.NEXT_PUBLIC_LAMIA_API_KEY || '',
       replicate: process.env.NEXT_PUBLIC_REPLICATE_API_KEY || '',
+      claude: process.env.NEXT_PUBLIC_CLAUDE_API_KEY || '',
     };
   }
 
@@ -151,7 +152,7 @@ export class AIServiceManager {
   }
 
   // Code Generation with Gemini and DeepSeek
-  async generateCode(prompt: string, language: string, options: any = {}) {
+  async generateCode(prompt: string, language: string, provider: string = 'gemini', options: any = {}) {
     try {
       const response = await fetch('/api/ai/code', {
         method: 'POST',
@@ -162,7 +163,7 @@ export class AIServiceManager {
           prompt,
           language,
           options,
-          provider: 'gemini'
+          provider
         }),
       });
 
