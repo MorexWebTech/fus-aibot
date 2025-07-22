@@ -2,7 +2,7 @@
 
 A comprehensive AI platform that brings together multiple AI services for content creation, including voiceovers, image generation, video creation, music composition, code generation, and speech processing. This platform now includes an advanced AI feature that runs locally without the need for an external API.
 
-## Features
+## 🚀 Features
 
 - **AI Face Clone**: A new feature that allows you to clone faces using AI.
 - **Admin Panel**: A comprehensive admin panel to manage users, content, and blog posts.
@@ -11,14 +11,46 @@ A comprehensive AI platform that brings together multiple AI services for conten
 - **Payment System**: A payment system that supports both NGN and USD currencies, with Paystack and Flutterwave.
 - **Subscription System**: A subscription system with different plans.
 - **Credit System**: A credit/token system for using the AI services.
+- **jules.google**: The jules.google feature is now available.
 
-## Admin and User Portals
+### 🎙️ AI Voiceover
+- **Premium Voice Generation**: High-quality text-to-speech with multiple voice options
+- **Multiple Providers**: Premium, Standard, and Fast voice generation
+- **Customizable Settings**: Adjustable speech speed and voice selection
+- **Export Ready**: Download generated audio in MP3 format
 
-The platform now includes admin and user portals to manage users and services.
+### 🖼️ Image Generation
+- **AI Image Creation**: Generate stunning images from text descriptions
+- **Stock Photo Search**: Search and access Pexels stock photos
+- **Multiple Styles**: Photorealistic, artistic, cartoon, abstract, and digital art
+- **Custom Dimensions**: Various size options from 512x512 to 1024x768
+- **High Quality Output**: Professional-grade image generation
 
-## jules.google
+### 🎬 Video Generation
+- **AI Video Creation**: Generate videos from text prompts using cutting-edge AI
+- **Multiple Qualities**: Standard (480p), HD (720p), and Full HD (1080p)
+- **Various Styles**: Realistic, cinematic, animated, and artistic
+- **Flexible Duration**: 3 to 15-second video clips
+- **Download Support**: Export videos in MP4 format
 
-The jules.google feature is now available.
+### 🎵 Music Generation
+- **AI Music Composition**: Create original music tracks from text descriptions
+- **Multiple Genres**: Ambient, classical, electronic, rock, jazz, pop, and cinematic
+- **Flexible Duration**: 15 seconds to 2 minutes
+- **Quality Options**: Large, medium, and fast models for different needs
+- **Professional Output**: High-quality audio generation
+
+### 💻 Code Generation
+- **Multi-Language Support**: JavaScript, TypeScript, Python, PHP, Java, C#, Go, Rust
+- **Framework Integration**: React, Vue, Angular, Django, Laravel, and more
+- **Smart Code Generation**: Context-aware code creation with best practices
+- **Export Functionality**: Download generated code with proper file extensions
+
+### 🎤 Speech Processing
+- **Speech-to-Text**: Convert audio files to text with high accuracy
+- **Text-to-Speech**: Generate natural-sounding speech from text
+- **Multiple Formats**: Support for MP3, WAV, M4A audio files
+- **Real-time Processing**: Fast and efficient audio processing
 
 ## 🚀 Features
 
