@@ -2,6 +2,16 @@
 
 A comprehensive AI platform that brings together multiple AI services for content creation, including voiceovers, image generation, video creation, music composition, code generation, and speech processing. This platform now includes an advanced AI feature that runs locally without the need for an external API.
 
+## Features
+
+- **AI Face Clone**: A new feature that allows you to clone faces using AI.
+- **Admin Panel**: A comprehensive admin panel to manage users, content, and blog posts.
+- **CMS**: A content management system to manage the content of the application.
+- **Blog**: A blog to keep users updated with the latest news and features.
+- **Payment System**: A payment system that supports both NGN and USD currencies, with Paystack and Flutterwave.
+- **Subscription System**: A subscription system with different plans.
+- **Credit System**: A credit/token system for using the AI services.
+
 ## Admin and User Portals
 
 The platform now includes admin and user portals to manage users and services.

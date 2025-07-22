@@ -4,13 +4,13 @@ import Flutterwave from 'flutterwave-node-v3';
 const flw = new Flutterwave(process.env.FLUTTERWAVE_PUBLIC_KEY, process.env.FLUTTERWAVE_SECRET_KEY);
 
 export async function POST(req: NextRequest) {
-  const { email, amount, tx_ref } = await req.json();
+  const { email, amount, currency, tx_ref } = await req.json();
 
   try {
     const payload = {
       tx_ref,
       amount,
-      currency: "NGN",
+      currency,
       redirect_url: "https://fus-ai-model.vercel.app/payment-callback",
       customer: {
         email,
