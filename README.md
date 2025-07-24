@@ -2,16 +2,32 @@
 
 A comprehensive AI platform that brings together multiple AI services for content creation, including voiceovers, image generation, video creation, music composition, code generation, and speech processing. This platform now includes an advanced AI feature that runs locally without the need for an external API.
 
-## 🚀 Features
+## Features
 
-- **AI Face Clone**: A new feature that allows you to clone faces using AI.
-- **Admin Panel**: A comprehensive admin panel to manage users, content, and blog posts.
-- **CMS**: A content management system to manage the content of the application.
-- **Blog**: A blog to keep users updated with the latest news and features.
-- **Payment System**: A payment system that supports both NGN and USD currencies, with Paystack and Flutterwave.
-- **Subscription System**: A subscription system with different plans.
-- **Credit System**: A credit/token system for using the AI services.
-- **jules.google**: The jules.google feature is now available.
+### AI Services
+*   **Text Generation**: Generate text using a variety of models from RapidAPI.
+*   **Face Clone**: Swap faces in images using a RapidAPI service.
+*   **AI Voiceover**: High-quality text-to-speech with multiple voice options.
+*   **Image Generation**: Generate stunning images from text descriptions.
+*   **Video Generation**: Generate videos from text prompts using cutting-edge AI.
+*   **Long Video Generation (Local)**: Generate long videos locally using a pre-trained model.
+*   **Music Generation**: Create original music tracks from text descriptions.
+*   **Code Generation**: Multi-language support for code generation.
+*   **Speech Processing**: Speech-to-text and text-to-speech conversion.
+
+### User Management
+*   **Admin Panel**: Manage users, services, and other application settings.
+*   **Team Management**: Create and manage teams of users.
+*   **Organization Registration**: Allow users to register as part of an organization.
+*   **OAuth**: Sign in with GitHub or Google.
+
+### Payments and Subscriptions
+*   **Payment System**: Integrated with Flutterwave and Paystack.
+*   **NGN & USD Currency**: Supports both NGN and USD currencies.
+*   **Subscription System**: Manage user subscriptions.
+*   **Tokens/Credits**: Users can purchase and use credits for AI services.
+
+## 🚀 Features
 
 ### 🎙️ AI Voiceover
 - **Premium Voice Generation**: High-quality text-to-speech with multiple voice options

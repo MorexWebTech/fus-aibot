@@ -1,11 +1,21 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { pipeline } from '@xenova/transformers';
 
-export async function POST(req: NextRequest) {
-  const { prompt } = await req.json();
+export async function POST(req: Request) {
+  try {
+    const { prompt } = await req.json();
 
-  // In a real application, you would call your local long video generation model here.
-  // For now, we'll just return a mock response.
-  const videoUrl = 'https://www.w3schools.com/html/mov_bbb.mp4';
+    const pipe = await pipeline('text-to-video', 'zeroscope/zeroscope-v2-576w');
+    const output = await pipe(prompt, {
+      num_inference_steps: 25,
+      num_frames: 24,
+    });
 
-  return NextResponse.json({ videoUrl });
+    const videoUrl = output.videos[0];
+
+    return NextResponse.json({ videoUrl });
+  } catch (error) {
+    console.error('Long video generation error:', error);
+    return NextResponse.json({ error: 'Failed to generate long video' }, { status: 500 });
+  }
 }

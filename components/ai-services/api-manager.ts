@@ -20,6 +20,7 @@ export class AIServiceManager {
       lamia: process.env.NEXT_PUBLIC_LAMIA_API_KEY || '',
       replicate: process.env.NEXT_PUBLIC_REPLICATE_API_KEY || '',
       claude: process.env.NEXT_PUBLIC_CLAUDE_API_KEY || '',
+      rapidapi: process.env.NEXT_PUBLIC_RAPIDAPI_KEY || '',
     };
   }
 
@@ -242,6 +243,59 @@ export class AIServiceManager {
       URL.revokeObjectURL(downloadUrl);
     } catch (error) {
       console.error('Download error:', error);
+      throw error;
+    }
+  }
+
+  // Text Generation with RapidAPI
+  async generateText(prompt: string, options: any = {}) {
+    try {
+      const response = await fetch('/api/ai/text', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          options,
+          provider: 'rapidapi'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate text');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Text generation error:', error);
+      throw error;
+    }
+  }
+
+  // Face Clone with RapidAPI
+  async cloneFace(sourceImageUrl: string, targetImageUrl: string, options: any = {}) {
+    try {
+      const response = await fetch('/api/ai/face-clone', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sourceImageUrl,
+          targetImageUrl,
+          options,
+          provider: 'rapidapi'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to clone face');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Face clone error:', error);
       throw error;
     }
   }

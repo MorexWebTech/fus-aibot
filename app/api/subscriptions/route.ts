@@ -1,30 +1,28 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
 
-// This is a mock database. In a real application, you would use a database.
-const userSubscriptions = {
-  'user1@example.com': 'premium',
-  'user2@example.com': 'basic',
-};
+const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const email = searchParams.get('email');
+export async function POST(req: Request) {
+  try {
+    const { userId, plan } = await req.json();
 
-  if (!email) {
-    return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    const startDate = new Date();
+    const endDate = new Date();
+    endDate.setMonth(endDate.getMonth() + 1);
+
+    const subscription = await prisma.subscription.create({
+      data: {
+        userId,
+        plan,
+        startDate,
+        endDate,
+      },
+    });
+
+    return NextResponse.json(subscription);
+  } catch (error) {
+    console.error('Subscription creation error:', error);
+    return NextResponse.json({ error: 'Failed to create subscription' }, { status: 500 });
   }
-
-  const subscription = userSubscriptions[email] || 'free';
-  return NextResponse.json({ subscription });
-}
-
-export async function POST(req: NextRequest) {
-  const { email, subscription } = await req.json();
-
-  if (!email || !subscription) {
-    return NextResponse.json({ error: 'Email and subscription are required' }, { status: 400 });
-  }
-
-  userSubscriptions[email] = subscription;
-  return NextResponse.json({ subscription: userSubscriptions[email] });
 }

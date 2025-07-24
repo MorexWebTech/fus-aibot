@@ -1,28 +1,34 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import Flutterwave from 'flutterwave-node-v3';
 
-const flw = new Flutterwave(process.env.FLUTTERWAVE_PUBLIC_KEY, process.env.FLUTTERWAVE_SECRET_KEY);
+const flw = new Flutterwave(process.env.FLUTTERWAVE_PUBLIC_KEY || '', process.env.FLUTTERWAVE_SECRET_KEY || '');
 
-export async function POST(req: NextRequest) {
-  const { email, amount, currency, tx_ref } = await req.json();
-
+export async function POST(req: Request) {
   try {
+    const { amount, currency, email, tx_ref } = await req.json();
+
     const payload = {
-      tx_ref,
-      amount,
-      currency,
-      redirect_url: "https://fus-ai-model.vercel.app/payment-callback",
-      customer: {
-        email,
-      },
-      customizations: {
-        title: "Fus AI Model",
-        description: "Payment for credits",
-      },
+      card_number: 'YOUR_CARD_NUMBER',
+      cvv: 'YOUR_CARD_CVV',
+      expiry_month: 'YOUR_CARD_EXPIRY_MONTH',
+      expiry_year: 'YOUR_CARD_EXPIRY_YEAR',
+      currency: currency,
+      amount: amount,
+      email: email,
+      tx_ref: tx_ref,
+      fullname: 'John Doe',
+      redirect_url: 'https://your-redirect-url.com',
+      authorization: {
+        mode: 'pin',
+        pin: '1234'
+      }
     };
-    const response = await flw.Payment.initiate(payload);
+
+    const response = await flw.Charge.card(payload);
+    console.log(response);
     return NextResponse.json(response);
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error('Flutterwave payment error:', error);
+    return NextResponse.json({ error: 'Failed to process payment' }, { status: 500 });
   }
 }

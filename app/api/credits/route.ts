@@ -1,29 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
 
-// This is a mock database. In a real application, you would use a database.
-const userCredits = {
-  'user1@example.com': 100,
-};
+const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const email = searchParams.get('email');
+export async function POST(req: Request) {
+  try {
+    const { userId, credits } = await req.json();
 
-  if (!email) {
-    return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    const user = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        credits: {
+          increment: credits,
+        },
+      },
+    });
+
+    return NextResponse.json(user);
+  } catch (error) {
+    console.error('Credit update error:', error);
+    return NextResponse.json({ error: 'Failed to update credits' }, { status: 500 });
   }
-
-  const credits = userCredits[email] || 0;
-  return NextResponse.json({ credits });
-}
-
-export async function POST(req: NextRequest) {
-  const { email, credits } = await req.json();
-
-  if (!email || !credits) {
-    return NextResponse.json({ error: 'Email and credits are required' }, { status: 400 });
-  }
-
-  userCredits[email] = (userCredits[email] || 0) + credits;
-  return NextResponse.json({ credits: userCredits[email] });
 }

@@ -1,24 +1,60 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
 
-export async function GET(req: NextRequest) {
-  const { data, error } = await supabase.from('teams').select('*');
+const prisma = new PrismaClient();
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+export async function POST(req: Request) {
+  try {
+    const { name, userIds } = await req.json();
+
+    const team = await prisma.team.create({
+      data: {
+        name,
+        users: {
+          connect: userIds.map((id: string) => ({ id })),
+        },
+      },
+    });
+
+    return NextResponse.json(team);
+  } catch (error) {
+    console.error('Team creation error:', error);
+    return NextResponse.json({ error: 'Failed to create team' }, { status: 500 });
   }
-
-  return NextResponse.json(data);
 }
 
-export async function POST(req: NextRequest) {
-  const { name, owner_id } = await req.json();
+export async function PUT(req: Request) {
+  try {
+    const { id, name, userIds } = await req.json();
 
-  const { data, error } = await supabase.from('teams').insert([{ name, owner_id }]);
+    const team = await prisma.team.update({
+      where: { id },
+      data: {
+        name,
+        users: {
+          set: userIds.map((id: string) => ({ id })),
+        },
+      },
+    });
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(team);
+  } catch (error) {
+    console.error('Team update error:', error);
+    return NextResponse.json({ error: 'Failed to update team' }, { status: 500 });
   }
+}
 
-  return NextResponse.json(data);
+export async function DELETE(req: Request) {
+  try {
+    const { id } = await req.json();
+
+    await prisma.team.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ message: 'Team deleted successfully' });
+  } catch (error) {
+    console.error('Team deletion error:', error);
+    return NextResponse.json({ error: 'Failed to delete team' }, { status: 500 });
+  }
 }
